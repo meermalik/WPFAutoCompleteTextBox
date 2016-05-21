@@ -77,6 +77,11 @@ namespace WPFAutoCompleteTextBox
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
+        public bool MultiLine
+        {
+            get { return (bool)GetValue(MultiLineProperty); }
+            set { SetValue(MultiLineProperty, value); }
+        }
 
         #region Region DependencyProperty
         // Using a DependencyProperty as the backing store for DataSource. // This enables animation, styling, binding, etc...
@@ -89,6 +94,8 @@ namespace WPFAutoCompleteTextBox
         DependencyProperty.Register("Height", typeof(int), typeof(AutoCompleteTextBox));
         public static readonly DependencyProperty TextProperty =
         DependencyProperty.Register("Text", typeof(string), typeof(AutoCompleteTextBox));
+        public static readonly DependencyProperty MultiLineProperty =
+        DependencyProperty.Register("MultiLine", typeof(bool), typeof(AutoCompleteTextBox));
         #endregion
 
         #region Region RoutedEventHandler
@@ -129,6 +136,9 @@ namespace WPFAutoCompleteTextBox
                 txtAutoComplete.Text = Convert.ToString(lstData.SelectedItem);
                 listSelectedIndex = lstData.SelectedIndex;
             }
+      
+                txtAutoComplete.AcceptsReturn = MultiLine;
+          
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
@@ -257,7 +267,7 @@ namespace WPFAutoCompleteTextBox
             base.OnPreviewKeyDown(e);
         }
         private void Filter()
-       {
+        {
             s = txtAutoComplete.Text.Trim();
             if (lstNames == null)
             {

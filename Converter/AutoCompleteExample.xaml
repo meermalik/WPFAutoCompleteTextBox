@@ -9,7 +9,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
-        <Developerz:AutoCompleteTextBox x:Name="txtAutoCompleteBox" Width="310" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"></Developerz:AutoCompleteTextBox>
+        <Developerz:AutoCompleteTextBox x:Name="txtAutoCompleteBox" MultiLine="True" Width="310" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"></Developerz:AutoCompleteTextBox>
         <!--<Button Name="btnGetText" Content="GetText" Click="GetText_Click" Grid.Row="1" Height="20" Width="71"></Button>-->
     </Grid>
 </Window>
