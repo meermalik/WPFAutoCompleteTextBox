@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "converter", "Converter\converter.csproj", "{B7A2F30C-1D6F-49CE-839F-E5744C603E43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Converter\Example.csproj", "{B7A2F30C-1D6F-49CE-839F-E5744C603E43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFAutoCompleteTextBox", "AutoComplete\WPFAutoCompleteTextBox.csproj", "{E101F3BA-F377-464E-B5CC-BA516950BF2F}"
 EndProject

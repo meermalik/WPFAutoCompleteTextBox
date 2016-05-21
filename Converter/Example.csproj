@@ -55,16 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AutoCompleteBox1.xaml.cs">
-      <DependentUpon>AutoCompleteBox1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AutoCompleteExample.xaml.cs">
       <DependentUpon>AutoCompleteExample.xaml</DependentUpon>
     </Compile>
-    <Page Include="AutoCompleteBox1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AutoCompleteExample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
