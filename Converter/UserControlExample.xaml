@@ -1,0 +1,17 @@
+﻿<Window x:Class="converter.UserControlExample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:converter"
+        mc:Ignorable="d"
+        Title="UserControlExample" Height="300" Width="500" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="500"/>
+        </Grid.RowDefinitions>
+        <local:DemoUserControl></local:DemoUserControl>
+        <local:AutoCompleteBox Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="txtAutoCompleteTextBox" TextBoxContentChanged="txtAutoCompleteTextBox_TextBoxContentChanged" btnDropClick="txtAutoCompleteTextBox_btnDropClick"></local:AutoCompleteBox>
+    </Grid>
+</Window>

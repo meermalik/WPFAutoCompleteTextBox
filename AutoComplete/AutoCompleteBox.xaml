@@ -1,0 +1,168 @@
+<UserControl x:Class="WPFAutoCompleteTextBox.AutoCompleteTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" x:Name="rootcontrol" Loaded="rootcontrol_Loaded">
+    <UserControl.Resources>
+        <!--Scrollbar Thumbs-->
+        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="Grid">
+                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
+                            <Border x:Name="Rectangle1" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="Horizontal">
+                                <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
+                                <Setter TargetName="Rectangle1" Property="Height" Value="7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--ScrollBars-->
+        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+            <Setter Property="Foreground" Value="#8C8C8C" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.00001*" />
+                            </Grid.RowDefinitions>
+
+                            <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
+                                <Setter Value="{DynamicResource ButtonSelectBrush}" TargetName="Thumb" Property="Background" />
+                            </Trigger>
+                            <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
+                                <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background" />
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto" />
+                                <Setter Property="Height" Value="10" />
+                                <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
+                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel>
+            <WrapPanel>
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <WrapPanel Background="White">
+                        <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="{Binding Height,ElementName=rootcontrol}" MinHeight="20" HorizontalAlignment="Left" 
+                 Name="txtAutoComplete" VerticalAlignment="Center" Width="{Binding Width,ElementName=rootcontrol}"
+                 TextChanged="txtAutoComplete_TextChanged_1" Foreground="Black" BorderThickness="0" Text="{Binding Text,ElementName=rootcontrol}">
+                        </TextBox>
+                        <!--<WrapPanel Background="LightBlue" Height="{Binding Height1,ElementName=rootcontrol}">-->
+                        <ToggleButton Name="btnDrop" Width="30" Background="Transparent" VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                          Height="{Binding Height,ElementName=rootcontrol}" Click="btnDrop_Click" BorderThickness="0" MinHeight="20"
+                                      BorderBrush="White">
+                            <ToggleButton.Style>
+                                <Style TargetType="{x:Type ToggleButton}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ToggleButton.Style>
+                            <Polygon Points="8,3 20,3 14.5,15" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Polygon.Style>
+                                    <Style TargetType="{x:Type Polygon}">
+                                        <Setter Property="Fill" Value="#BCBEC0" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Fill" Value="#33363d">
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Polygon.Style>
+                            </Polygon>
+                            <!--</Grid>-->
+                            <!--</ControlTemplate>
+                    </ToggleButton.Template>-->
+                        </ToggleButton>
+                    </WrapPanel>
+                </Border>
+            </WrapPanel>
+            <!--<ScrollViewer HorizontalScrollBarVisibility="Hidden">-->
+            <ListView Height="130"  HorizontalAlignment="Left" Name="lstData" SelectionChanged="LstData_SelectionChanged"
+        VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="Collapsed" PreviewMouseDown="lstData_PreviewMouseLeftButtonDown" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Padding="2" Name="txtblckItem" Grid.Row="0" Text="{Binding}"  Width="{Binding Width, ElementName=rootcontrol}" TextWrapping="Wrap"></TextBlock>
+                            <Rectangle Height="1"  Fill="#e7e1e1" Grid.Row="1" VerticalAlignment="Stretch" Width="{Binding Width, ElementName=rootcontrol}"></Rectangle>
+                        </Grid>
+                        </StackPanel>
+                        <!--<DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="txtblckItem" Property="Background" Value="#00AAFF" />
+                                <Setter TargetName="txtblckItem" Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </DataTemplate.Triggers>-->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--</ScrollViewer>-->
+        </StackPanel>
+    </Grid>
+</UserControl>

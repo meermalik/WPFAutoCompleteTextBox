@@ -1,0 +1,15 @@
+﻿<Window x:Class="converter.AutoCompleteExample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:UsrCtrl="clr-namespace:converter"
+        xmlns:Developerz="clr-namespace:WPFAutoCompleteTextBox;assembly=WPFDeveloperz"
+        Title="AutoCompleteExample" Height="500" Width="500" Loaded="Window_Loaded" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Developerz:AutoCompleteTextBox x:Name="txtAutoCompleteBox" Width="310" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"></Developerz:AutoCompleteTextBox>
+        <!--<Button Name="btnGetText" Content="GetText" Click="GetText_Click" Grid.Row="1" Height="20" Width="71"></Button>-->
+    </Grid>
+</Window>
